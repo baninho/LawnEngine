@@ -13,10 +13,13 @@
 #include "LambdaSensor.h"
 #include "TdcDistinction.h"
 
-typedef void(*fp)();
+
 
 class LawnEngine
 {
+
+	typedef void(*fp)(LawnEngine lawnEngine);
+
 public:
 	LawnEngine();
 	~LawnEngine();
@@ -31,13 +34,6 @@ public:
 	void connect_10ms(fp function);
 	void connect_100ms(fp function);
 	void connect_1000ms(fp function);
-private:
-	std::list<fp> slot_init;
-	std::list<fp> slot_100us;
-	std::list<fp> slot_1ms;
-	std::list<fp> slot_10ms;
-	std::list<fp> slot_100ms;
-	std::list<fp> slot_1000ms;
 
 	PressureSensor pressureSensor;
 	AirSystem airSystem;
@@ -49,5 +45,15 @@ private:
 	LambdaControl lambdaControl;
 	LambdaSensor lambdaSensor;
 	TdcDistinction tdcDistinction;
+private:
+	std::list<fp> slot_init;
+	std::list<fp> slot_100us;
+	std::list<fp> slot_1ms;
+	std::list<fp> slot_10ms;
+	std::list<fp> slot_100ms;
+	std::list<fp> slot_1000ms;
+
+
+
 };
 

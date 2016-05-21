@@ -4,10 +4,8 @@
 
 LawnEngine::LawnEngine()
 {
-	connect_100us(&(pressureSensor.calcIntakePressure));
-	connect_1000ms(&(airSystem.DisplayIntakePressure));
 	for (std::list<fp>::iterator i = slot_init.begin(); i != slot_init.end(); ++i)
-		(*i)();
+		(*i)(LawnEngine());
 }
 
 
@@ -18,31 +16,31 @@ LawnEngine::~LawnEngine()
 void LawnEngine::run_100us()
 {
 	for (std::list<fp>::iterator i = slot_100us.begin(); i != slot_100us.end(); ++i)
-		(*i)();
+		(*i)(LawnEngine());
 }
 
 void LawnEngine::run_1ms()
 {
 	for (std::list<fp>::iterator i = slot_1ms.begin(); i != slot_1ms.end(); ++i)
-		(*i)();
+		(*i)(LawnEngine());
 }
 
 void LawnEngine::run_10ms()
 {
 	for (std::list<fp>::iterator i = slot_10ms.begin(); i != slot_10ms.end(); ++i)
-		(*i)();
+		(*i)(LawnEngine());
 }
 
 void LawnEngine::run_100ms()
 {
 	for (std::list<fp>::iterator i = slot_100ms.begin(); i != slot_100ms.end(); ++i)
-		(*i)();
+		(*i)(LawnEngine());
 }
 
 void LawnEngine::run_1000ms()
 {
 	for (std::list<fp>::iterator i = slot_1000ms.begin(); i != slot_1000ms.end(); ++i)
-		(*i)();
+		(*i)(LawnEngine());
 }
 
 void LawnEngine::connect_init(fp function)
@@ -76,13 +74,23 @@ void LawnEngine::connect_1000ms(fp function)
 	printf("\n connect 1 second task");
 }
 
-void printText() {
+void printText(LawnEngine lawnEngine) {
 	printf("\n run 1 second task");
+}
+
+void calcIntakePressure(LawnEngine lawnEngine) {
+	lawnEngine.pressureSensor.calcIntakePressure();
+}
+
+void displayIntakePressure(LawnEngine lawnEngine) {
+	lawnEngine.airSystem.DisplayIntakePressure();
 }
 
 int main()
 {
 	LawnEngine lawnEngine;
+
+
 	std::chrono::time_point<std::chrono::steady_clock> now;
 	std::chrono::duration<double> diff;
 	int count1 = 0, count10 = 0, count100 = 0, count1000 = 0;
@@ -90,6 +98,8 @@ int main()
 	now = std::chrono::steady_clock::now();
 
 	lawnEngine.connect_1000ms(&printText);
+	lawnEngine.connect_100us(&calcIntakePressure);
+	lawnEngine.connect_1000ms(&displayIntakePressure);
 
 	while (true) {
 		diff = std::chrono::steady_clock::now() - now;

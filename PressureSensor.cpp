@@ -1,6 +1,6 @@
 #include "PressureSensor.h"
 
-
+float IntakePressure = 0;
 
 PressureSensor::PressureSensor()
 {
