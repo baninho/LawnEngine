@@ -1,11 +1,11 @@
 #include "LawnEngine.h"
 
 
-
 LawnEngine::LawnEngine()
 {
+
 	for (std::list<fp>::iterator i = slot_init.begin(); i != slot_init.end(); ++i)
-		(*i)(LawnEngine());
+		(*i)(LawnEngine::Instance());
 }
 
 
@@ -13,34 +13,39 @@ LawnEngine::~LawnEngine()
 {
 }
 
+LawnEngine& LawnEngine::Instance() {
+	static LawnEngine _instance;
+	return _instance;
+}
+
 void LawnEngine::run_100us()
 {
 	for (std::list<fp>::iterator i = slot_100us.begin(); i != slot_100us.end(); ++i)
-		(*i)(LawnEngine());
+		(*i)(LawnEngine::Instance());
 }
 
 void LawnEngine::run_1ms()
 {
 	for (std::list<fp>::iterator i = slot_1ms.begin(); i != slot_1ms.end(); ++i)
-		(*i)(LawnEngine());
+		(*i)(LawnEngine::Instance());
 }
 
 void LawnEngine::run_10ms()
 {
 	for (std::list<fp>::iterator i = slot_10ms.begin(); i != slot_10ms.end(); ++i)
-		(*i)(LawnEngine());
+		(*i)(LawnEngine::Instance());
 }
 
 void LawnEngine::run_100ms()
 {
 	for (std::list<fp>::iterator i = slot_100ms.begin(); i != slot_100ms.end(); ++i)
-		(*i)(LawnEngine());
+		(*i)(LawnEngine::Instance());
 }
 
 void LawnEngine::run_1000ms()
 {
 	for (std::list<fp>::iterator i = slot_1000ms.begin(); i != slot_1000ms.end(); ++i)
-		(*i)(LawnEngine());
+		(*i)(LawnEngine::Instance());
 }
 
 void LawnEngine::connect_init(fp function)
@@ -88,18 +93,17 @@ void displayIntakePressure(LawnEngine lawnEngine) {
 
 int main()
 {
-	LawnEngine lawnEngine;
-
+	LawnEngine lawnEngine = LawnEngine::Instance();
 
 	std::chrono::time_point<std::chrono::steady_clock> now;
 	std::chrono::duration<double> diff;
 	int count1 = 0, count10 = 0, count100 = 0, count1000 = 0;
 
-	now = std::chrono::steady_clock::now();
-
 	lawnEngine.connect_1000ms(&printText);
 	lawnEngine.connect_100us(&calcIntakePressure);
 	lawnEngine.connect_1000ms(&displayIntakePressure);
+
+	now = std::chrono::steady_clock::now();
 
 	while (true) {
 		diff = std::chrono::steady_clock::now() - now;
@@ -129,6 +133,4 @@ int main()
 		}
 		else continue;
 	}
-
-
 }

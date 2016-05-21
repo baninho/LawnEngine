@@ -13,16 +13,15 @@
 #include "LambdaSensor.h"
 #include "TdcDistinction.h"
 
-
-
 class LawnEngine
 {
-
 	typedef void(*fp)(LawnEngine lawnEngine);
 
 public:
 	LawnEngine();
 	~LawnEngine();
+	static LawnEngine& Instance();
+
 	void run_100us();
 	void run_1ms();
 	void run_10ms();
@@ -45,6 +44,7 @@ public:
 	LambdaControl lambdaControl;
 	LambdaSensor lambdaSensor;
 	TdcDistinction tdcDistinction;
+
 private:
 	std::list<fp> slot_init;
 	std::list<fp> slot_100us;
@@ -52,8 +52,6 @@ private:
 	std::list<fp> slot_10ms;
 	std::list<fp> slot_100ms;
 	std::list<fp> slot_1000ms;
-
-
 
 };
 

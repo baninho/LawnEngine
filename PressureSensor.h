@@ -10,7 +10,7 @@ public:
 	~PressureSensor();
 	void calcIntakePressure();
 private:
-	int sensorVoltageReading;
+	unsigned int sensorVoltageReading;
 	float factor;
 	float offset;
 };

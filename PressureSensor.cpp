@@ -4,9 +4,9 @@ float IntakePressure = 0;
 
 PressureSensor::PressureSensor()
 {
-	factor = 0.02;
-	offset = 0.1;
-	sensorVoltageReading = 0;
+	factor = 0.02f;
+	offset = 0.1f;
+	sensorVoltageReading = 0u;
 }
 
 
