@@ -79,10 +79,6 @@ void LawnEngine::connect_1000ms(fp function)
 	printf("\n connect 1 second task");
 }
 
-void printText(LawnEngine lawnEngine) {
-	printf("\n run 1 second task");
-}
-
 void calcIntakePressure(LawnEngine lawnEngine) {
 	lawnEngine.pressureSensor.calcIntakePressure();
 }
@@ -99,7 +95,6 @@ int main()
 	std::chrono::duration<double> diff;
 	int count1 = 0, count10 = 0, count100 = 0, count1000 = 0;
 
-	lawnEngine.connect_1000ms(&printText);
 	lawnEngine.connect_100us(&calcIntakePressure);
 	lawnEngine.connect_1000ms(&displayIntakePressure);
 
