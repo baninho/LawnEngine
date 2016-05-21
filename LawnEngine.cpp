@@ -4,6 +4,7 @@
 
 LawnEngine::LawnEngine()
 {
+	connect_100us(&(pressureSensor.calcIntakePressure));
 	for (std::list<fp>::iterator i = slot_init.begin(); i != slot_init.end(); ++i)
 		(*i)();
 }

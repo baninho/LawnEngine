@@ -2,6 +2,16 @@
 #include <stdio.h>
 #include <chrono>
 #include <list>
+#include "PressureSensor.h"
+#include "AirSystem.h"
+#include "CrankAngleSensor.h"
+#include "FuelPump.h"
+#include "IgnitionCoil.h"
+#include "IgnitionControl.h"
+#include "InjectionValve.h"
+#include "LambdaControl.h"
+#include "LambdaSensor.h"
+#include "TdcDistinction.h"
 
 typedef void(*fp)();
 
@@ -28,5 +38,16 @@ private:
 	std::list<fp> slot_10ms;
 	std::list<fp> slot_100ms;
 	std::list<fp> slot_1000ms;
+
+	PressureSensor pressureSensor;
+	AirSystem airSystem;
+	CrankAngleSensor crankAngleSensor;
+	FuelPump fuelPump;
+	IgnitionCoil ignitionCoil;
+	IgnitionControl ignitionControl;
+	InjectionValve injectionValve;
+	LambdaControl lambdaControl;
+	LambdaSensor lambdaSensor;
+	TdcDistinction tdcDistinction;
 };
 
