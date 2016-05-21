@@ -7,8 +7,8 @@ class PressureSensor
 public:
 	PressureSensor();
 	~PressureSensor();
-private:
 	void calcIntakePressure();
+private:
 	int sensorVoltageReading;
 	float factor;
 	float offset;
