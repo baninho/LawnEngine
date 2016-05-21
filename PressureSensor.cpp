@@ -4,7 +4,7 @@
 
 PressureSensor::PressureSensor()
 {
-	factor = 0.1;
+	factor = 0.02;
 	offset = 0;
 }
 
