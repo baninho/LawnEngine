@@ -5,6 +5,7 @@
 LawnEngine::LawnEngine()
 {
 	connect_100us(&(pressureSensor.calcIntakePressure));
+	connect_1000ms(&(airSystem.DisplayIntakePressure));
 	for (std::list<fp>::iterator i = slot_init.begin(); i != slot_init.end(); ++i)
 		(*i)();
 }
