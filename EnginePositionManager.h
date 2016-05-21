@@ -1,6 +1,7 @@
 #pragma once
 
 extern float EngineSpeed;
+extern bool CogFacingSensor;
 
 class EnginePositionManager
 {
