@@ -4,10 +4,10 @@ float AirMassFlow = 0;
 
 AirSystem::AirSystem()
 {
-	displacement = 0.25;
-	gasConstant = 287;
-	airTemperature = 325;
-	intakeEfficiency = 0.8;
+	displacement = 0.25f;
+	gasConstant = 287.0f;
+	airTemperature = 325.0f;
+	intakeEfficiency = 0.8f;
 }
 
 
