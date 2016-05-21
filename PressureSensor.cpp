@@ -6,6 +6,7 @@ PressureSensor::PressureSensor()
 {
 	factor = 0.02;
 	offset = 0.1;
+	sensorVoltageReading = 0;
 }
 
 

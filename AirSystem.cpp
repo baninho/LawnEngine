@@ -13,5 +13,5 @@ AirSystem::~AirSystem()
 
 void AirSystem::DisplayIntakePressure()
 {
-	printf("%f", IntakePressure);
+	printf("\nIntake Pressure: %f", IntakePressure);
 }
