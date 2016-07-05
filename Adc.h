@@ -48,5 +48,19 @@ class Adc
 public:
 	Adc();
 	~Adc();
+
+	int readLambda();
+	int readPressure();
+	int readAngle();
+
+	/* 
+	*PI functions
+
+	int dev_open(int bus_no, int slave_address, int force_slave);
+	void dev_close(int dev_fd);
+	static unsigned short pcf8591_read_value(int client, unsigned char reg); 
+	static int pcf8591_write_value(int client, unsigned char reg, unsigned short value);
 	
+
+	*/
 };
