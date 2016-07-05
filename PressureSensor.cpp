@@ -1,7 +1,6 @@
 #include "PressureSensor.h"
 
 float IntakePressure = 0;
-unsigned char pressureVoltageReading = 0u;
 
 PressureSensor::PressureSensor()
 {
