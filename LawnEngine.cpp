@@ -8,7 +8,6 @@ LawnEngine::LawnEngine()
 		(*i)(LawnEngine::Instance());
 }
 
-
 LawnEngine::~LawnEngine()
 {
 }

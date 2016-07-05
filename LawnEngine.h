@@ -12,6 +12,8 @@
 #include "LambdaControl.h"
 #include "LambdaSensor.h"
 #include "TdcDistinction.h"
+#include "Dac.h"
+#include "Adc.h"
 
 class LawnEngine
 {
@@ -44,6 +46,8 @@ public:
 	LambdaControl lambdaControl;
 	LambdaSensor lambdaSensor;
 	TdcDistinction tdcDistinction;
+	Dac dac;
+	Adc adc;
 
 private:
 	std::list<fp> slot_init;
