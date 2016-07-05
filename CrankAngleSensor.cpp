@@ -1,6 +1,6 @@
 #include "CrankAngleSensor.h"
 
-bool CogFacingSensor = false;
+bool cogFacingSensor = false;
 
 CrankAngleSensor::CrankAngleSensor()
 {
@@ -15,6 +15,6 @@ CrankAngleSensor::~CrankAngleSensor()
 void CrankAngleSensor::CalcCrankSensor() 
 {
 	static bool _dontToggle = false;
-	CogFacingSensor = abs(sensorVoltageReading) > minDetectionVoltage || _dontToggle;
-	_dontToggle = abs(sensorVoltageReading) > minDetectionVoltage;
+	cogFacingSensor = abs(angleVoltageReading) > minDetectionVoltage || _dontToggle;
+	_dontToggle = abs(angleVoltageReading) > minDetectionVoltage;
 }

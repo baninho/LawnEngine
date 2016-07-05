@@ -1,7 +1,7 @@
 #include "LambdaSensor.h"
 
-bool Rich = false;
-bool Lean = false;
+bool rich = false;
+float lambdaVoltage = 0;
 
 LambdaSensor::LambdaSensor()
 {

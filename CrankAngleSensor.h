@@ -1,7 +1,8 @@
 #pragma once
 #include <cstdlib>
 
-extern bool CogFacingSensor;
+extern unsigned short angleVoltageReading;
+extern bool cogFacingSensor;
 
 class CrankAngleSensor
 {
@@ -10,7 +11,6 @@ public:
 	~CrankAngleSensor();
 	void CalcCrankSensor();
 private:
-	int sensorVoltageReading;
 	int minDetectionVoltage;
 };
 

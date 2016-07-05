@@ -1,6 +1,7 @@
 #pragma once
 
 extern unsigned short lambdaVoltageReading;
+extern float lambdaVoltage;
 
 class LambdaSensor
 {
@@ -10,6 +11,5 @@ public:
 	void CalcLambdaSensor();
 private:
 	unsigned short stoichVoltage;
-	unsigned char rich;
 };
 
