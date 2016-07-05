@@ -1,6 +1,7 @@
 #pragma once
 
 extern float IntakePressure;
+extern unsigned char sensorVoltageReading;
 
 class PressureSensor
 
@@ -10,7 +11,6 @@ public:
 	~PressureSensor();
 	void calcIntakePressure();
 private:
-	unsigned int sensorVoltageReading;
 	float factor;
 	float offset;
 };
