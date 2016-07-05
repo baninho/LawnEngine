@@ -15,16 +15,22 @@ Adc::~Adc()
 int Adc::readLambda()
 {
 	lambdaVoltageReading = 0u;
+
+	return 0;
 }
 
 int Adc::readPressure()
 {
 	pressureVoltageReading = 0u;
+
+	return 0;
 }
 
 int Adc::readAngle()
 {
 	angleVoltageReading = 0u;
+
+	return 0;
 }
 
 
