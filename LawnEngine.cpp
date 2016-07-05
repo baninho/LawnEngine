@@ -86,6 +86,21 @@ void displayIntakePressure(LawnEngine lawnEngine) {
 	lawnEngine.airSystem.DisplayIntakePressure();
 }
 
+void readLambda(LawnEngine lawnEngine)
+{
+	lawnEngine.adc.readLambda();
+}
+
+void readPressure(LawnEngine lawnEngine)
+{
+	lawnEngine.adc.readPressure();
+}
+
+void readAngle(LawnEngine lawnEngine)
+{
+	lawnEngine.adc.readAngle();
+}
+
 int main()
 {
 	LawnEngine lawnEngine = LawnEngine::Instance();
@@ -94,7 +109,10 @@ int main()
 	std::chrono::duration<double> diff;
 	int count1 = 0, count10 = 0, count100 = 0, count1000 = 0;
 
-	lawnEngine.connect_100us(&calcIntakePressure);
+	lawnEngine.connect_100us(&readAngle);
+	lawnEngine.connect_10ms(&readPressure);
+	lawnEngine.connect_10ms(&readLambda);
+	lawnEngine.connect_10ms(&calcIntakePressure);
 	lawnEngine.connect_1000ms(&displayIntakePressure);
 
 	now = std::chrono::steady_clock::now();
