@@ -1,7 +1,7 @@
 #pragma once
 
 extern float IntakePressure;
-extern unsigned char pressureVoltageReading;
+extern unsigned short pressureVoltageReading;
 
 class PressureSensor
 

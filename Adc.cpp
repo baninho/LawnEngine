@@ -1,6 +1,6 @@
 #include "Adc.h"
 
-unsigned char pressureVoltageReading, lambdaVoltageReading, angleVoltageReading = 0u;
+unsigned short pressureVoltageReading, lambdaVoltageReading, angleVoltageReading = 0u;
 
 
 Adc::Adc()
@@ -21,7 +21,7 @@ int Adc::readLambda()
 
 int Adc::readPressure()
 {
-	pressureVoltageReading = 0u;
+	pressureVoltageReading = 10u;
 
 	return 0;
 }

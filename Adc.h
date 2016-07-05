@@ -41,7 +41,7 @@
 #include <sys/types.h>
 // #include <linux/i2c-dev.h> 
 
-extern unsigned char pressureVoltageReading, lambdaVoltageReading, angleVoltageReading;
+extern unsigned short pressureVoltageReading, lambdaVoltageReading, angleVoltageReading;
 
 class Adc
 {

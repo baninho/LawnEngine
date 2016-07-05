@@ -15,6 +15,5 @@ LambdaSensor::~LambdaSensor()
 
 void LambdaSensor::CalcLambdaSensor() 
 {
-	Rich = sensorVoltageReading > stoichVoltage;
-	Lean = !Rich;
+	rich = lambdaVoltageReading > stoichVoltage;
 }

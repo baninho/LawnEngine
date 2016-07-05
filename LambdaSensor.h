@@ -1,7 +1,6 @@
 #pragma once
 
-extern bool Lean;
-extern bool Rich;
+extern unsigned short lambdaVoltageReading;
 
 class LambdaSensor
 {
@@ -10,7 +9,7 @@ public:
 	~LambdaSensor();
 	void CalcLambdaSensor();
 private:
-	int sensorVoltageReading;
-	int stoichVoltage;
+	unsigned short stoichVoltage;
+	unsigned char rich;
 };
 
