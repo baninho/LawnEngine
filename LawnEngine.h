@@ -3,6 +3,7 @@
 #include <chrono>
 #include <list>
 #include <thread>
+#include <Windows.h>
 
 #include "PressureSensor.h"
 #include "AirSystem.h"
@@ -58,6 +59,5 @@ private:
 	std::list<fp> slot_10ms;
 	std::list<fp> slot_100ms;
 	std::list<fp> slot_1000ms;
-
 };
 

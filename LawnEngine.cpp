@@ -38,7 +38,7 @@ void LawnEngine::run_100us()
 			}
 		}
 
-		usec = 10 - 1000000 * (std::chrono::steady_clock::now() - now).count();
+		usec = 50 - 1000000 * (std::chrono::steady_clock::now() - now).count();
 		std::this_thread::sleep_for(std::chrono::microseconds(usec));
 	}
 }
@@ -63,7 +63,7 @@ void LawnEngine::run_1ms()
 			}
 		}
 
-		usec = 100 - 1000000 * (std::chrono::steady_clock::now() - now).count();
+		usec = 500 - 1000000 * (std::chrono::steady_clock::now() - now).count();
 		std::this_thread::sleep_for(std::chrono::microseconds(usec));
 	}
 
@@ -89,7 +89,7 @@ void LawnEngine::run_10ms()
 			}
 		}
 
-		usec = 1000 - 1000000 * (std::chrono::steady_clock::now() - now).count();
+		usec = 5000 - 1000000 * (std::chrono::steady_clock::now() - now).count();
 		std::this_thread::sleep_for(std::chrono::microseconds(usec));
 	}
 }
@@ -114,7 +114,7 @@ void LawnEngine::run_100ms()
 			}
 		}
 
-		usec = 1000 - 1000000 * (std::chrono::steady_clock::now() - now).count();
+		usec = 5000 - 1000000 * (std::chrono::steady_clock::now() - now).count();
 		std::this_thread::sleep_for(std::chrono::microseconds(usec));
 	}
 }
@@ -139,7 +139,7 @@ void LawnEngine::run_1000ms()
 			}
 		}
 
-		usec = 10000 - 1000000 * (std::chrono::steady_clock::now() - now).count();
+		usec = 50000 - 1000000 * (std::chrono::steady_clock::now() - now).count();
 		std::this_thread::sleep_for(std::chrono::microseconds(usec));
 	}
 
@@ -239,5 +239,9 @@ int main()
 	std::thread thread_10ms(run_10ms, lawnEngine);
 	std::thread thread_100ms(run_100ms, lawnEngine);
 	std::thread thread_1000ms(run_1000ms, lawnEngine);
-
+	
+	while (true)
+	{
+		std::this_thread::sleep_for(std::chrono::seconds(1));
+	}
 }
