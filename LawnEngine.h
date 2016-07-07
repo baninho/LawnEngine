@@ -2,6 +2,8 @@
 #include <stdio.h>
 #include <chrono>
 #include <list>
+#include <thread>
+
 #include "PressureSensor.h"
 #include "AirSystem.h"
 #include "CrankAngleSensor.h"

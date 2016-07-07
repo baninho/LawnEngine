@@ -3,9 +3,10 @@
 
 LawnEngine::LawnEngine()
 {
-
-	for (std::list<fp>::iterator i = slot_init.begin(); i != slot_init.end(); ++i)
+	for (std::list<fp>::iterator i = slot_init.begin(); i != slot_init.end(); ++i) 
+	{
 		(*i)(LawnEngine::Instance());
+	}
 }
 
 LawnEngine::~LawnEngine()
@@ -19,8 +20,27 @@ LawnEngine& LawnEngine::Instance() {
 
 void LawnEngine::run_100us()
 {
-	for (std::list<fp>::iterator i = slot_100us.begin(); i != slot_100us.end(); ++i)
-		(*i)(LawnEngine::Instance());
+	long long int usec;
+	std::chrono::time_point<std::chrono::steady_clock> now;
+	std::chrono::duration<double> diff;
+
+	while (true) 
+	{
+		diff = std::chrono::steady_clock::now() - now;
+
+		if (diff.count() >= 0.0001)
+		{
+			now = std::chrono::steady_clock::now();
+
+			for (std::list<fp>::iterator i = slot_100us.begin(); i != slot_100us.end(); ++i) 
+			{
+				(*i)(LawnEngine::Instance());
+			}
+		}
+
+		usec = 10 - 1000000 * (std::chrono::steady_clock::now() - now).count();
+		std::this_thread::sleep_for(std::chrono::microseconds(usec));
+	}
 }
 
 void LawnEngine::run_1ms()
@@ -78,6 +98,11 @@ void LawnEngine::connect_1000ms(fp function)
 	printf("\n connect 1 second task");
 }
 
+void run_100us(LawnEngine lawnEngine)
+{
+	lawnEngine.run_100us();
+}
+
 void calcIntakePressure(LawnEngine lawnEngine) {
 	lawnEngine.pressureSensor.calcIntakePressure();
 }
@@ -117,11 +142,12 @@ int main()
 
 	now = std::chrono::steady_clock::now();
 
+	std::thread thread_100us(run_100us, lawnEngine);
+
 	while (true) {
 		diff = std::chrono::steady_clock::now() - now;
 		if (diff.count() >= 0.0001) {
 			now = std::chrono::steady_clock::now();
-			lawnEngine.run_100us();
 			++count1;
 		}
 		else continue;
