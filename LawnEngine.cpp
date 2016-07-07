@@ -38,7 +38,7 @@ void LawnEngine::run_100us()
 			}
 		}
 
-		usec = 50 - 1000000 * (std::chrono::steady_clock::now() - now).count();
+		usec = 100 - 1000000 * (std::chrono::steady_clock::now() - now).count();
 		std::this_thread::sleep_for(std::chrono::microseconds(usec));
 	}
 }
@@ -63,7 +63,7 @@ void LawnEngine::run_1ms()
 			}
 		}
 
-		usec = 500 - 1000000 * (std::chrono::steady_clock::now() - now).count();
+		usec = 1000 - 1000000 * (std::chrono::steady_clock::now() - now).count();
 		std::this_thread::sleep_for(std::chrono::microseconds(usec));
 	}
 
@@ -114,7 +114,7 @@ void LawnEngine::run_100ms()
 			}
 		}
 
-		usec = 5000 - 1000000 * (std::chrono::steady_clock::now() - now).count();
+		usec = 20000 - 1000000 * (std::chrono::steady_clock::now() - now).count();
 		std::this_thread::sleep_for(std::chrono::microseconds(usec));
 	}
 }
@@ -139,7 +139,7 @@ void LawnEngine::run_1000ms()
 			}
 		}
 
-		usec = 50000 - 1000000 * (std::chrono::steady_clock::now() - now).count();
+		usec = 200000 - 1000000 * (std::chrono::steady_clock::now() - now).count();
 		std::this_thread::sleep_for(std::chrono::microseconds(usec));
 	}
 
