@@ -1,4 +1,4 @@
-le: LawnEngine.o Adc.o AirSystem.o CrankAngleSensor.o Dac.o EnginePositionManager.o FuelPump.o IgnitionCoil.o IgnitionControl.o InjectionValve.o LambdaControl.o LambdaSensor.o PressureSensor.o TdcDistinction.o
+le: bin/LawnEngine.o bin/Adc.o bin/AirSystem.o bin/CrankAngleSensor.o bin/Dac.o bin/EnginePositionManager.o bin/FuelPump.o bin/IgnitionCoil.o bin/IgnitionControl.o bin/InjectionValve.o bin/LambdaControl.o bin/LambdaSensor.o bin/PressureSensor.o bin/TdcDistinction.o
 	gcc -o bin/le -std=c++11 LawnEngine.o Adc.o AirSystem.o CrankAngleSensor.o Dac.o EnginePositionManager.o FuelPump.o IgnitionCoil.o IgnitionControl.o InjectionValve.o LambdaControl.o LambdaSensor.o PressureSensor.o TdcDistinction.o
 
 LawnEngine.o: LawnEngine.cpp LawnEngine.h
