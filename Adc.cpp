@@ -124,7 +124,7 @@ static int pcf8591_write_value(int client, unsigned char reg, unsigned short val
 
 Adc::Adc()
 {
-	if (this->dev_fd = this->dev_open(BUS_NO, PCF8591_SLAVE_ADDR, FORCE) < 0);
+	if (this->dev_fd = this->dev_open(BUS_NO, PCF8591_SLAVE_ADDR, FORCE) < 0)
 	{
 		perror("open dev");
 		this->devOpenFail = 1;
