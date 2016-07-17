@@ -1,5 +1,5 @@
 le: bin/LawnEngine.o bin/Adc.o bin/AirSystem.o bin/CrankAngleSensor.o bin/Dac.o bin/EnginePositionManager.o bin/FuelPump.o bin/IgnitionCoil.o bin/IgnitionControl.o bin/InjectionValve.o bin/LambdaControl.o bin/LambdaSensor.o bin/PressureSensor.o bin/TdcDistinction.o
-	g++ -o bin/le -std=c++11 -lstdc++ bin/LawnEngine.o bin/Adc.o bin/AirSystem.o bin/CrankAngleSensor.o bin/Dac.o bin/EnginePositionManager.o bin/FuelPump.o bin/IgnitionCoil.o bin/IgnitionControl.o bin/InjectionValve.o bin/LambdaControl.o bin/LambdaSensor.o bin/PressureSensor.o bin/TdcDistinction.o
+	g++ -o bin/le -std=c++11 -lstdc++ -pthread -lrt bin/LawnEngine.o bin/Adc.o bin/AirSystem.o bin/CrankAngleSensor.o bin/Dac.o bin/EnginePositionManager.o bin/FuelPump.o bin/IgnitionCoil.o bin/IgnitionControl.o bin/InjectionValve.o bin/LambdaControl.o bin/LambdaSensor.o bin/PressureSensor.o bin/TdcDistinction.o
 
 bin/LawnEngine.o: LawnEngine.cpp LawnEngine.h
 	g++ -c -o bin/LawnEngine.o -std=c++11 -lstdc++ LawnEngine.cpp
