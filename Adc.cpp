@@ -141,10 +141,10 @@ static int pcf8591_write_value(int client, unsigned char reg, unsigned short val
 #define PCF8591_SLAVE_ADDR	0x48
 #define REG_CTL			0x40
 #define REG_DAC_LED		0x40
-#define REG_ADC_POT		0x42	// AIN 3
-#define REG_ADC_NC		0x41	// AIN 2
-#define REG_ADC_TEMP		0x43	// AIN 1
-#define REG_ADC_LIGHT		0x44	// AIN 0
+#define REG_ADC_POTI		0x40	// AIN 3
+#define REG_ADC_LIGHT		0x41	// AIN 2
+#define REG_ADC_TEMP		0x42	// AIN 1
+#define REG_ADC_NC		0x43	// AIN 0
 #define FORCE			0
 
 int Adc::Update()
@@ -169,23 +169,23 @@ int Adc::Update()
 			for (i = 0; i <= 3; i++)
 			{
 				res = pcf8591_read_value(dev_fd, 0x40 + i);
-				switch (i)
+				switch (0x40 + i)
 				{
-				case 0:
+				case REG_ADC_POTI:
 					printf("reg %02x [%5.5s] = %02x [=%d]\n",
-						0x40 + i, "light", res, res);
+						REG_ADC_POTI, "POTI", res, res);
 					break;
-				case 1:
+				case REG_ADC_LIGHT:
 					printf("reg %02x [%5.5s] = %02x [=%d]\n",
-						0x40 + i, "nc", res, res);
+						REG_ADC_LIGHT, "LIGHT", res, res);
 					break;
-				case 2:
+				case REG_ADC_TEMP:
 					printf("reg %02x [%5.5s] = %02x [=%d]\n",
-						0x40 + i, "poti", res, res);
+						REG_ADC_TEMP, "TEMP", res, res);
 					break;
-				case 3:
+				case REG_ADC_NC:
 					printf("reg %02x [%5.5s] = %02x [=%d]\n",
-						0x40 + i, "temp", res, res);
+						REG_ADC_NC, "NC", res, res);
 					break;
 				}
 			}
