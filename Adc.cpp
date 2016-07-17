@@ -2,9 +2,19 @@
 
 unsigned short pressureVoltageReading, lambdaVoltageReading, angleVoltageReading = 0u;
 
+
+Adc::Adc()
+{
+}
+
+
+Adc::~Adc()
+{
+}
+
 int Adc::readLambda()
 {
-	lambdaVoltageReading = this->light;
+	lambdaVoltageReading = 0u;
 
 	return 0;
 }
@@ -18,12 +28,13 @@ int Adc::readPressure()
 
 int Adc::readAngle()
 {
-	angleVoltageReading = this->nc;
+	angleVoltageReading = 0u;
 
 	return 0;
 }
 
 
+//* PI CODE BELOW
 
 
 
@@ -120,16 +131,6 @@ static int pcf8591_write_value(int client, unsigned char reg, unsigned short val
 }
 
 
-Adc::Adc()
-{
-}
-
-
-Adc::~Adc()
-{
-}
-
-
 //
 // main loop
 // open device read registers
@@ -149,6 +150,7 @@ Adc::~Adc()
 int Adc::Update()
 {
 	int fail;
+	int dev_fd;
 	int i;
 	unsigned short res;
 	unsigned char aValue;

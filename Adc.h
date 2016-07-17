@@ -62,5 +62,4 @@ public:
 	int Update();
 privte:
 	unsigned short pot, temp, light, nc;
-	int dev_fd;
 };
