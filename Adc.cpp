@@ -34,8 +34,7 @@ int Adc::readAngle()
 }
 
 
-/*
-* PI CODE BELOW
+//* PI CODE BELOW
 
 
 
@@ -97,7 +96,7 @@ int Adc::dev_open(int bus_no, int slave_address, int force_slave)
 // returns nothing
 //
 // ***********************************************************************
-void dev_close(int dev_fd)
+void Adc::dev_close(int dev_fd)
 {
 	if (dev_fd >= 0)
 	{
@@ -148,7 +147,7 @@ static int pcf8591_write_value(int client, unsigned char reg, unsigned short val
 #define REG_ADC_NC		0x44
 #define FORCE			0
 
-main(int argc, char **argv)
+int Adc::Update()
 {
 	int fail;
 	int dev_fd;
@@ -158,7 +157,7 @@ main(int argc, char **argv)
 	unsigned char aValue;
 
 
-	if ((dev_fd = dev_open(BUS_NO, PCF8591_SLAVE_ADDR, FORCE)) >= 0)
+	if ((dev_fd = this->dev_open(BUS_NO, PCF8591_SLAVE_ADDR, FORCE)) >= 0)
 	{
 		aValue = 0;
 
@@ -199,7 +198,7 @@ main(int argc, char **argv)
 		pcf8591_write_value(dev_fd, REG_DAC_LED, 0);
 
 
-		dev_close(dev_fd);
+		this->dev_close(dev_fd);
 		fail = 0;
 
 	}
@@ -216,4 +215,3 @@ main(int argc, char **argv)
 
 
 
-*/

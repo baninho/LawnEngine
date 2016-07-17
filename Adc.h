@@ -32,16 +32,18 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-// #include <unistd.h>
+#include <unistd.h>
 #include <string.h>
 #include <fcntl.h>
 #include <errno.h>
-// #include <getopt.h>
+#include <getopt.h>
 #include <math.h>
 #include <sys/types.h>
-// #include <linux/i2c-dev.h> 
+#include <linux/i2c-dev.h> 
 
 extern unsigned short pressureVoltageReading, lambdaVoltageReading, angleVoltageReading;
+static unsigned short pcf8591_read_value(int client, unsigned char reg); 
+static int pcf8591_write_value(int client, unsigned char reg, unsigned short value);
 
 class Adc
 {
@@ -53,14 +55,10 @@ public:
 	int readPressure();
 	int readAngle();
 
-	/* 
-	*PI functions
+	//*PI functions
 
 	int dev_open(int bus_no, int slave_address, int force_slave);
 	void dev_close(int dev_fd);
-	static unsigned short pcf8591_read_value(int client, unsigned char reg); 
-	static int pcf8591_write_value(int client, unsigned char reg, unsigned short value);
-	
+	int Update();
 
-	*/
 };
