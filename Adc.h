@@ -71,7 +71,7 @@ public:
 	int dev_open(int bus_no, int slave_address, int force_slave);
 	void dev_close(int dev_fd);
 	int Update();
-privte:
+private:
 	unsigned short pot, temp, light, nc;
 	int dev_fd;
 	int devOpenFail;
