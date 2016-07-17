@@ -1,7 +1,7 @@
 #include "Adc.h"
 
 unsigned short pressureVoltageReading, lambdaVoltageReading, angleVoltageReading = 0u;
-
+unsigned short pot, temp, light, nc = 0u;
 
 Adc::Adc()
 {
@@ -21,7 +21,7 @@ int Adc::readLambda()
 
 int Adc::readPressure()
 {
-	pressureVoltageReading = this->pot;
+	pressureVoltageReading = pot;
 
 	return 0;
 }
@@ -154,7 +154,6 @@ int Adc::Update()
 	int i;
 	unsigned short res;
 	unsigned char aValue;
-
 
 	if ((dev_fd = this->dev_open(BUS_NO, PCF8591_SLAVE_ADDR, FORCE)) >= 0)
 	{
