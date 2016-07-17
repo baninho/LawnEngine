@@ -148,6 +148,7 @@ Adc::~Adc()
 
 int Adc::Update()
 {
+	int fail;
 	int i;
 	unsigned short res;
 	unsigned char aValue;
@@ -198,16 +199,16 @@ int Adc::Update()
 
 
 		this->dev_close(dev_fd);
-		devOpenFail = 0;
+		fail = 0;
 
 	}
 	else
 	{
 		perror("open dev");
-		devOpenFail = 1;
+		fail = 1;
 	}
 
-	return(devOpenFail);
+	return(fail);
 }
 
 

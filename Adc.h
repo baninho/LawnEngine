@@ -63,5 +63,4 @@ public:
 privte:
 	unsigned short pot, temp, light, nc;
 	int dev_fd;
-	int devOpenFail;
 };
