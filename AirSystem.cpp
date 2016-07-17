@@ -17,7 +17,7 @@ AirSystem::~AirSystem()
 
 void AirSystem::DisplayIntakePressure()
 {
-	printf("\nIntake Pressure: %f", IntakePressure);
+	printf("\nIntake Pressure: %0.3f bar", IntakePressure);
 }
 
 void AirSystem::CalculateAirMassFlow() 
