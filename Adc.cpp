@@ -128,7 +128,9 @@ Adc::Adc()
 	{
 		perror("open dev");
 		this->devOpenFail = 1;
-	} else
+	}
+
+	else
 	{
 		this->devOpenFail = 0;
 	}
