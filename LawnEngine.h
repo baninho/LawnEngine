@@ -1,9 +1,10 @@
 #pragma once
+
+#include <Windows.h>
 #include <stdio.h>
 #include <chrono>
 #include <list>
 #include <thread>
-#include <Windows.h>
 
 #include "PressureSensor.h"
 #include "AirSystem.h"
