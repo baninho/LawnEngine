@@ -21,7 +21,7 @@ int Adc::readLambda()
 
 int Adc::readPressure()
 {
-	pressureVoltageReading = 10u;
+	pressureVoltageReading = this->pot;
 
 	return 0;
 }
@@ -153,7 +153,6 @@ int Adc::Update()
 	int dev_fd;
 	int i;
 	unsigned short res;
-	unsigned short pot, temp, light, nc;
 	unsigned char aValue;
 
 
@@ -174,18 +173,22 @@ int Adc::Update()
 				case REG_ADC_POTI:
 					printf("reg %02x [%5.5s] = %02x [=%d]\n",
 						REG_ADC_POTI, "POTI", res, res);
+					pot = res;
 					break;
 				case REG_ADC_LIGHT:
 					printf("reg %02x [%5.5s] = %02x [=%d]\n",
 						REG_ADC_LIGHT, "LIGHT", res, res);
+					light = res;
 					break;
 				case REG_ADC_TEMP:
 					printf("reg %02x [%5.5s] = %02x [=%d]\n",
 						REG_ADC_TEMP, "TEMP", res, res);
+					temp = res;
 					break;
 				case REG_ADC_NC:
 					printf("reg %02x [%5.5s] = %02x [=%d]\n",
 						REG_ADC_NC, "NC", res, res);
+					nc = res;
 					break;
 				}
 			}
