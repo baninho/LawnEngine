@@ -13,8 +13,6 @@ int Adc::readPressure()
 {
 	pressureVoltageReading = this->pot;
 
-	//this->pot = pcf8591_read_value(this->dev_fd, REG_ADC_POTI);
-
 	return 0;
 }
 
