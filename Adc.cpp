@@ -163,8 +163,8 @@ int Adc::Update()
 
 		pcf8591_write_value(dev_fd, REG_CTL, 0x43); // ctl byte
 
-		for (aValue = 0; aValue != 250; aValue += 10)
-		{
+		//for (aValue = 0; aValue != 250; aValue += 10)
+		//{
 			printf("\n");
 			for (i = 0; i <= 3; i++)
 			{
@@ -192,8 +192,7 @@ int Adc::Update()
 
 			pcf8591_write_value(dev_fd, REG_DAC_LED, aValue);
 			printf("analog ......: = %02x [=%d]\n", aValue, aValue);
-			sleep(1);
-		}
+		//}
 
 		pcf8591_write_value(dev_fd, REG_DAC_LED, 0);
 
