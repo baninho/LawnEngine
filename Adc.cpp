@@ -122,28 +122,17 @@ static int pcf8591_write_value(int client, unsigned char reg, unsigned short val
 
 Adc::Adc()
 {
-	if (this->dev_fd = this->dev_open(BUS_NO, PCF8591_SLAVE_ADDR, FORCE) < 0);
-	{
-		perror("open dev");
-		this->devOpenFail = 1;
-	}
-
-	else
-	{
-		this->devOpenFail = 0;
-	}
 }
 
 
 Adc::~Adc()
 {
-	this->dev_close(this->dev_fd);
 }
 
 
 //
 // main loop
-// read registers
+// open device read registers
 // print results
 // 
 
@@ -155,46 +144,64 @@ int Adc::Update()
 	unsigned char aValue;
 
 
-	aValue = 0;
-	pcf8591_write_value(dev_fd, REG_CTL, 0x43); // ctl byte
-
-	//for (aValue = 0; aValue != 250; aValue += 10)
-	//{
-	printf("\n");
-	for (i = 0; i <= 3; i++)
+	if ((dev_fd = this->dev_open(BUS_NO, PCF8591_SLAVE_ADDR, FORCE)) >= 0)
 	{
-		res = pcf8591_read_value(dev_fd, 0x40 + i);
-		switch (0x40 + i)
-		{
-		case REG_ADC_POTI:
-			printf("reg %02x [%5.5s] = %02x [=%d]\n",
-				REG_ADC_POTI, "POTI", res, res);
-			pot = res;
-			break;
-		case REG_ADC_LIGHT:
-			printf("reg %02x [%5.5s] = %02x [=%d]\n",
-				REG_ADC_LIGHT, "LIGHT", res, res);
-			light = res;
-			break;
-		case REG_ADC_TEMP:
-			printf("reg %02x [%5.5s] = %02x [=%d]\n",
-				REG_ADC_TEMP, "TEMP", res, res);
-			temp = res;
-			break;
-		case REG_ADC_NC:
-			printf("reg %02x [%5.5s] = %02x [=%d]\n",
-				REG_ADC_NC, "NC", res, res);
-			nc = res;
-			break;
-		}
+		aValue = 0;
+
+		pcf8591_write_value(dev_fd, REG_CTL, 0x43); // ctl byte
+
+		//for (aValue = 0; aValue != 250; aValue += 10)
+		//{
+			printf("\n");
+			for (i = 0; i <= 3; i++)
+			{
+				res = pcf8591_read_value(dev_fd, 0x40 + i);
+				switch (0x40 + i)
+				{
+				case REG_ADC_POTI:
+					printf("reg %02x [%5.5s] = %02x [=%d]\n",
+						REG_ADC_POTI, "POTI", res, res);
+					pot = res;
+					break;
+				case REG_ADC_LIGHT:
+					printf("reg %02x [%5.5s] = %02x [=%d]\n",
+						REG_ADC_LIGHT, "LIGHT", res, res);
+					light = res;
+					break;
+				case REG_ADC_TEMP:
+					printf("reg %02x [%5.5s] = %02x [=%d]\n",
+						REG_ADC_TEMP, "TEMP", res, res);
+					temp = res;
+					break;
+				case REG_ADC_NC:
+					printf("reg %02x [%5.5s] = %02x [=%d]\n",
+						REG_ADC_NC, "NC", res, res);
+					nc = res;
+					break;
+				}
+			}
+
+			pcf8591_write_value(dev_fd, REG_DAC_LED, aValue);
+			printf("analog ......: = %02x [=%d]\n", aValue, aValue);
+		//}
+
+		pcf8591_write_value(dev_fd, REG_DAC_LED, 0);
+
+
+		this->dev_close(dev_fd);
+		devOpenFail = 0;
+
 	}
-
-	pcf8591_write_value(dev_fd, REG_DAC_LED, aValue);
-	printf("analog ......: = %02x [=%d]\n", aValue, aValue);
-	//}
-
-	pcf8591_write_value(dev_fd, REG_DAC_LED, 0);
-
+	else
+	{
+		perror("open dev");
+		devOpenFail = 1;
+	}
 
 	return(devOpenFail);
 }
+
+
+
+
+
