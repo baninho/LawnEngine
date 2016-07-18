@@ -10,6 +10,17 @@ Adc::Adc()
 
 Adc::~Adc()
 {
+	dev_close(m_dev_fd);
+}
+
+void Adc::init() 
+{
+	if ((m_dev_fd = this->dev_open(BUS_NO, PCF8591_SLAVE_ADDR, FORCE)) >= 0) {
+		m_fail = 0;
+	} else {
+		m_fail = 1;
+		perror("open dev");
+	}
 }
 
 int Adc::readLambda()
@@ -23,6 +34,8 @@ int Adc::readPressure()
 {
 	pressureVoltageReading = pot;
 
+	//pressureVoltageReading = pcf8591_read_value(m_dev_fd, REG_ADC_POTI);
+	
 	return 0;
 }
 
@@ -145,18 +158,18 @@ int Adc::Update()
 	unsigned short res;
 	unsigned char aValue;
 
-	if ((dev_fd = this->dev_open(BUS_NO, PCF8591_SLAVE_ADDR, FORCE)) >= 0)
-	{
+	//if ((m_dev_fd = this->dev_open(BUS_NO, PCF8591_SLAVE_ADDR, FORCE)) >= 0)
+	//{
 		aValue = 0;
 
-		pcf8591_write_value(dev_fd, REG_CTL, 0x43); // ctl byte
+		pcf8591_write_value(m_dev_fd, REG_CTL, 0x43); // ctl byte
 
 		//for (aValue = 0; aValue != 250; aValue += 10)
 		//{
 			printf("\n");
 			for (i = 0; i <= 3; i++)
 			{
-				res = pcf8591_read_value(dev_fd, 0x40 + i);
+				res = pcf8591_read_value(m_dev_fd, 0x40 + i);
 				switch (0x40 + i)
 				{
 				case REG_ADC_POTI:
@@ -182,22 +195,22 @@ int Adc::Update()
 				}
 			}
 
-			pcf8591_write_value(dev_fd, REG_DAC_LED, aValue);
+			pcf8591_write_value(m_dev_fd, REG_DAC_LED, aValue);
 			printf("analog ......: = %02x [=%d]\n", aValue, aValue);
 		//}
 
-		pcf8591_write_value(dev_fd, REG_DAC_LED, 0);
+		pcf8591_write_value(m_dev_fd, REG_DAC_LED, 0);
 
 
-		this->dev_close(dev_fd);
-		fail = 0;
+	//	this->dev_close(m_dev_fd);
+	//	fail = 0;
 
-	}
-	else
-	{
-		perror("open dev");
-		fail = 1;
-	}
+	//}
+	//else
+	//{
+	//	perror("open dev");
+	//	fail = 1;
+	//}
 
 	return(fail);
 }

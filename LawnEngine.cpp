@@ -248,6 +248,8 @@ int main()
 {
 	LawnEngine lawnEngine = LawnEngine::Instance();
 
+	lawnEngine.adc->init();
+
 	lawnEngine.connect_100us(&readAngle);
 	lawnEngine.connect_10ms(&readPressure);
 	lawnEngine.connect_10ms(&readLambda);
