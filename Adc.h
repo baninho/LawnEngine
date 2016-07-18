@@ -52,7 +52,6 @@
 #define FORCE			0
 
 extern unsigned short pressureVoltageReading, lambdaVoltageReading, angleVoltageReading;
-extern unsigned short pot, temp, light, nc;
 static unsigned short pcf8591_read_value(int client, unsigned char reg); 
 static int pcf8591_write_value(int client, unsigned char reg, unsigned short value);
 
@@ -72,4 +71,5 @@ public:
 	void dev_close(int dev_fd);
 	int Update();
 private:
+	unsigned short pot, temp, light, nc;
 };
