@@ -3,19 +3,36 @@
 
 LawnEngine::LawnEngine()
 {
-	for (std::list<fp>::iterator i = slot_init.begin(); i != slot_init.end(); ++i)
-	{
-		(*i)(LawnEngine::Instance());
-	}
+	pressureSensor = new PressureSensor();
+	airSystem = new AirSystem();
+	crankAngleSensor = new CrankAngleSensor();
+	fuelPump = new FuelPump();
+	ignitionCoil = new IgnitionCoil();
+	ignitionControl = new IgnitionControl();
+	injectionValve = new InjectionValve();
+	lambdaControl = new LambdaControl();
+	lambdaSensor = new LambdaSensor();
+	tdcDistinction = new TdcDistinction();
+	dac = new Dac();
+	adc = new Adc();
 }
 
 LawnEngine::~LawnEngine()
 {
 }
 
-LawnEngine& LawnEngine::Instance() {
+LawnEngine& LawnEngine::Instance() 
+{
 	static LawnEngine _instance;
 	return _instance;
+}
+
+void LawnEngine::init() 
+{
+	for (std::list<fp>::iterator i = slot_init.begin(); i != slot_init.end(); ++i)
+	{
+		(*i)(LawnEngine::Instance());
+	}
 }
 
 void LawnEngine::run_100us()
