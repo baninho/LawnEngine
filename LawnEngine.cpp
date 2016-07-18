@@ -224,21 +224,6 @@ void displayIntakePressure(LawnEngine lawnEngine)
 	lawnEngine.airSystem->DisplayIntakePressure();
 }
 
-void readLambda(LawnEngine lawnEngine)
-{
-	lawnEngine.adc->readLambda();
-}
-
-void readPressure(LawnEngine lawnEngine)
-{
-	lawnEngine.adc->readPressure();
-}
-
-void readAngle(LawnEngine lawnEngine)
-{
-	lawnEngine.adc->readAngle();
-}
-
 void updateAdc(LawnEngine lawnEngine)
 {
 	lawnEngine.adc->Update();
@@ -250,12 +235,9 @@ int main()
 
 	lawnEngine.adc->init();
 
-	lawnEngine.connect_100us(&readAngle);
-	lawnEngine.connect_10ms(&readPressure);
-	lawnEngine.connect_10ms(&readLambda);
 	lawnEngine.connect_10ms(&calcIntakePressure);
-	lawnEngine.connect_1000ms(&displayIntakePressure);
-	lawnEngine.connect_1000ms(&updateAdc);
+	lawnEngine.connect_100ms(&displayIntakePressure);
+	lawnEngine.connect_100us(&updateAdc);
 
 	std::thread thread_100us(run_100us, lawnEngine);
 	std::thread thread_1ms(run_1ms, lawnEngine);

@@ -23,31 +23,6 @@ void Adc::init()
 	}
 }
 
-int Adc::readLambda()
-{
-	lambdaVoltageReading = 0u;
-
-	return 0;
-}
-
-int Adc::readPressure()
-{
-	pressureVoltageReading = pot;
-
-	//pcf8591_write_value(m_dev_fd, REG_CTL, 0x43); // ctl byte
-	//pressureVoltageReading = pcf8591_read_value(m_dev_fd, REG_ADC_POTI);
-	
-	return 0;
-}
-
-int Adc::readAngle()
-{
-	angleVoltageReading = 0u;
-
-	return 0;
-}
-
-
 
 
 // ***********************************************************************
@@ -152,47 +127,27 @@ static int pcf8591_write_value(int client, unsigned char reg, unsigned short val
 int Adc::Update()
 {
 	unsigned short res;
-	unsigned char aValue;
 	int i;
 
-	aValue = 0;
-
-	pcf8591_write_value(m_dev_fd, REG_CTL, 0x43); // ctl byte
-
-	printf("\n");
 	for (i = 0; i <= 3; i++)
 	{
 		res = pcf8591_read_value(m_dev_fd, 0x40 + i);
 		switch (0x40 + i)
 		{
 		case REG_ADC_POTI:
-			printf("reg %02x [%5.5s] = %02x [=%d]\n",
-				REG_ADC_POTI, "POTI", res, res);
-			pot = res;
+			pressureVoltageReading = res;
 			break;
 		case REG_ADC_LIGHT:
-			printf("reg %02x [%5.5s] = %02x [=%d]\n",
-				REG_ADC_LIGHT, "LIGHT", res, res);
-			light = res;
+			lambdaVoltageReading = res;
 			break;
 		case REG_ADC_TEMP:
-			printf("reg %02x [%5.5s] = %02x [=%d]\n",
-				REG_ADC_TEMP, "TEMP", res, res);
 			temp = res;
 			break;
 		case REG_ADC_NC:
-			printf("reg %02x [%5.5s] = %02x [=%d]\n",
-				REG_ADC_NC, "NC", res, res);
-			nc = res;
+		angleVoltageReading = res;
 			break;
 		}
 	}
-
-	pcf8591_write_value(m_dev_fd, REG_DAC_LED, aValue);
-	printf("analog ......: = %02x [=%d]\n", aValue, aValue);
-
-	pcf8591_write_value(m_dev_fd, REG_DAC_LED, 0);
-
 
 	return(m_fail);
 }
