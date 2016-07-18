@@ -3,6 +3,19 @@
 
 LawnEngine::LawnEngine()
 {
+	pressureSensor = new PressureSensor;
+	airSystem = new AirSystem;
+	crankAngleSensor = new CrankAngleSensor;
+	fuelPump = new FuelPump;
+	ignitionCoil = new IgnitionCoil;
+	ignitionControl = new IgnitionControl;
+	injectionValve = new InjectionValve;
+	lambdaControl = new LambdaControl;
+	lambdaSensor = new LambdaSensor;
+	tdcDistinction = new TdcDistinction; 
+	dac = new Dac;
+	adc = new Adc; 
+
 	for (std::list<fp>::iterator i = slot_init.begin(); i != slot_init.end(); ++i)
 	{
 		(*i)(LawnEngine::Instance());
@@ -203,32 +216,32 @@ void run_1000ms(LawnEngine lawnEngine)
 
 void calcIntakePressure(LawnEngine lawnEngine)
 {
-	lawnEngine.pressureSensor.calcIntakePressure();
+	lawnEngine.pressureSensor->calcIntakePressure();
 }
 
 void displayIntakePressure(LawnEngine lawnEngine) 
 {
-	lawnEngine.airSystem.DisplayIntakePressure();
+	lawnEngine.airSystem->DisplayIntakePressure();
 }
 
 void readLambda(LawnEngine lawnEngine)
 {
-	lawnEngine.adc.readLambda();
+	lawnEngine.adc->readLambda();
 }
 
 void readPressure(LawnEngine lawnEngine)
 {
-	lawnEngine.adc.readPressure();
+	lawnEngine.adc->readPressure();
 }
 
 void readAngle(LawnEngine lawnEngine)
 {
-	lawnEngine.adc.readAngle();
+	lawnEngine.adc->readAngle();
 }
 
 void updateAdc(LawnEngine lawnEngine)
 {
-	lawnEngine.adc.Update();
+	lawnEngine.adc->Update();
 }
 
 int main()

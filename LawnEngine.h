@@ -39,18 +39,18 @@ public:
 	void connect_100ms(fp function);
 	void connect_1000ms(fp function);
 
-	PressureSensor pressureSensor;
-	AirSystem airSystem;
-	CrankAngleSensor crankAngleSensor;
-	FuelPump fuelPump;
-	IgnitionCoil ignitionCoil;
-	IgnitionControl ignitionControl;
-	InjectionValve injectionValve;
-	LambdaControl lambdaControl;
-	LambdaSensor lambdaSensor;
-	TdcDistinction tdcDistinction;
-	Dac dac;
-	Adc adc;
+	PressureSensor* pressureSensor;
+	AirSystem* airSystem;
+	CrankAngleSensor* crankAngleSensor;
+	FuelPump* fuelPump;
+	IgnitionCoil* ignitionCoil;
+	IgnitionControl* ignitionControl;
+	InjectionValve* injectionValve;
+	LambdaControl* lambdaControl;
+	LambdaSensor* lambdaSensor;
+	TdcDistinction* tdcDistinction;
+	Dac* dac;
+	Adc* adc;
 
 private:
 	std::list<fp> slot_init;
