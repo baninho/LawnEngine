@@ -6,7 +6,7 @@ extern float EngineSpeed;								// From EPM
 extern float LamdaDesired;								// From Lambda control
 
 extern float AirMassFlow, AirMassPerCyl;				// Export Air
-extern float FuelMassPerCyl, InjectedFuelMass;			// Export Fuel
+extern float FuelMassPerCyl, InjectedFuelMassDes;		// Export Fuel
 
 
 class AirSystem
