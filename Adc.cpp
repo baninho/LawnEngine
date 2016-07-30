@@ -5,16 +5,6 @@ unsigned short pot, temp, light, nc = 0u;
 
 Adc::Adc()
 {
-}
-
-
-Adc::~Adc()
-{
-	dev_close(m_dev_fd);
-}
-
-void Adc::init()
-{
 	if ((m_dev_fd = this->dev_open(BUS_NO, PCF8591_SLAVE_ADDR, FORCE)) >= 0) {
 		m_fail = 0;
 	}
@@ -24,6 +14,11 @@ void Adc::init()
 	}
 }
 
+
+Adc::~Adc()
+{
+	dev_close(m_dev_fd);
+}
 
 
 // ***********************************************************************

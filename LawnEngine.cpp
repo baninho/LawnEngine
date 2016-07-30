@@ -233,8 +233,6 @@ int main()
 {
 	LawnEngine lawnEngine = LawnEngine::Instance();
 
-	lawnEngine.adc->init();
-
 	lawnEngine.connect_10ms(&calcIntakePressure);
 	lawnEngine.connect_100ms(&displayIntakePressure);
 	lawnEngine.connect_100us(&updateAdc);
