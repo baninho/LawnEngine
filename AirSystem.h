@@ -1,9 +1,13 @@
 #pragma once
 #include <stdio.h>
 
-extern float IntakePressure;
-extern float EngineSpeed;
-extern float AirMassFlow, AirMassPerCyl;
+extern float IntakePressure;							// From Pressure sensor
+extern float EngineSpeed;								// From EPM
+extern float LamdaDesired;								// From Lambda control
+
+extern float AirMassFlow, AirMassPerCyl;				// Export Air
+extern float FuelMassPerCyl, InjectedFuelMass;			// Export Fuel
+
 
 class AirSystem
 {
@@ -12,10 +16,13 @@ public:
 	~AirSystem();
 	void DisplayIntakePressure();
 	void CalculateAirMassFlow();
+	void CalculateFuelInj();
+	void CalculateFuelWallFilm();
+	void Lookup();
+	void Calc();
 private:
-	float displacement;
-	float gasConstant;
-	float airTemperature;
-	float intakeEfficiency;
+	const float displacement = 0.25f, gasConstant = 287.0f, AirFuelRatio = 15;
+	float airTemperature, intakeEfficiency;
+	float m_WallFilmMass, m_facWall;
 };
 
