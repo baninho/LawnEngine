@@ -229,11 +229,17 @@ void updateAdc(LawnEngine lawnEngine)
 	lawnEngine.adc->Update();
 }
 
+void calcAirSystem(LawnEngine lawnEngine)
+{
+	lawnEngine.airSystem->Calc();
+}
+
 int main()
 {
 	LawnEngine lawnEngine = LawnEngine::Instance();
 
 	lawnEngine.connect_10ms(&calcIntakePressure);
+	lawnEngine.connect_10ms(&calcAirSystem);
 	lawnEngine.connect_100ms(&displayIntakePressure);
 	lawnEngine.connect_100us(&updateAdc);
 
@@ -245,6 +251,6 @@ int main()
 	
 	while (true)
 	{
-		std::this_thread::sleep_for(std::chrono::seconds(1));
+		std::this_thread::sleep_for(std::chrono::seconds(1000));
 	}
 }
