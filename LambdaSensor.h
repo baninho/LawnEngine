@@ -2,6 +2,7 @@
 
 extern unsigned short lambdaVoltageReading;
 extern float lambdaVoltage;
+extern bool rich;
 
 class LambdaSensor
 {
