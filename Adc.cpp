@@ -13,11 +13,12 @@ Adc::~Adc()
 	dev_close(m_dev_fd);
 }
 
-void Adc::init() 
+void Adc::init()
 {
 	if ((m_dev_fd = this->dev_open(BUS_NO, PCF8591_SLAVE_ADDR, FORCE)) >= 0) {
 		m_fail = 0;
-	} else {
+	}
+	else {
 		m_fail = 1;
 		perror("open dev");
 	}
@@ -129,25 +130,10 @@ int Adc::Update()
 	unsigned short res;
 	int i;
 
-	for (i = 0; i <= 3; i++)
-	{
-		res = pcf8591_read_value(m_dev_fd, 0x40 + i);
-		switch (0x40 + i)
-		{
-		case REG_ADC_POTI:
-			pressureVoltageReading = res;
-			break;
-		case REG_ADC_LIGHT:
-			lambdaVoltageReading = res;
-			break;
-		case REG_ADC_TEMP:
-			temp = res;
-			break;
-		case REG_ADC_NC:
-		angleVoltageReading = res;
-			break;
-		}
-	}
+	pressureVoltageReading = pcf8591_read_value(m_dev_fd, REG_ADC_POTI);
+	lambdaVoltageReading = pcf8591_read_value(m_dev_fd, REG_ADC_LIGHT);
+	temp = pcf8591_read_value(m_dev_fd, REG_ADC_TEMP);
+	angleVoltageReading = pcf8591_read_value(m_dev_fd, REG_ADC_NC);
 
 	return(m_fail);
 }
