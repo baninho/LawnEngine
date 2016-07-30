@@ -22,5 +22,12 @@ void AirSystem::DisplayIntakePressure()
 
 void AirSystem::CalculateAirMassFlow() 
 {
-	AirMassFlow = EngineSpeed * IntakePressure * displacement / gasConstant / airTemperature * intakeEfficiency;
+	float _nEng, _intakeP, _airMF, _displace, _r;
+	
+	_nEng = EngineSpeed / 60; // 1/s
+	_intakeP = IntakePressure * 100; // Pa
+	_displace = displacement / 1000; // m3
+	
+	_airMF = _nEng * _intakeP * _displace / _r / airTemperature * intakeEfficiency; // kg/s
+	AirMassFlow = _airMF * 3600; // kg/h
 }
