@@ -3,7 +3,7 @@
 
 extern float IntakePressure;
 extern float EngineSpeed;
-extern float AirMassFlow;
+extern float AirMassFlow, AirMassPerCyl;
 
 class AirSystem
 {
