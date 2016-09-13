@@ -27,6 +27,7 @@ public:
 	~LawnEngine();
 	static LawnEngine& Instance();
 
+	void run_clocked(double dt_seconds, std::list<fp>& slots);
 	void run_100us();
 	void run_1ms();
 	void run_10ms();

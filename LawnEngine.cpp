@@ -31,6 +31,31 @@ LawnEngine& LawnEngine::Instance() {
 	return _instance;
 }
 
+void LawnEngine::run_clocked(double dt_seconds, std::list<fp>& slots)
+{
+	long long int usec;
+	std::chrono::time_point<std::chrono::steady_clock> now;
+	std::chrono::duration<double> diff;
+
+	while (true)
+	{
+		diff = std::chrono::steady_clock::now() - now;
+
+		if (diff.count() >= dt_seconds)
+		{
+			now = std::chrono::steady_clock::now();
+
+			for (std::list<fp>::iterator i = slot_100us.begin(); i != slot_100us.end(); ++i)
+			{
+				(*i)(LawnEngine::Instance());
+			}
+		}
+
+		usec = 1000000 * (dt_seconds - std::chrono::steady_clock::now() - now).count();
+		std::this_thread::sleep_for(std::chrono::microseconds(usec));
+	}
+}
+
 void LawnEngine::run_100us()
 {
 	long long int usec;
