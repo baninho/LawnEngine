@@ -58,129 +58,27 @@ void LawnEngine::run_clocked(double dt_seconds, std::list<fp>& slots)
 
 void LawnEngine::run_100us()
 {
-	long long int usec;
-	std::chrono::time_point<std::chrono::steady_clock> now;
-	std::chrono::duration<double> diff;
-
-	while (true)
-	{
-		diff = std::chrono::steady_clock::now() - now;
-
-		if (diff.count() >= 0.0001)
-		{
-			now = std::chrono::steady_clock::now();
-
-			for (std::list<fp>::iterator i = slot_100us.begin(); i != slot_100us.end(); ++i)
-			{
-				(*i)(LawnEngine::Instance());
-			}
-		}
-
-		usec = 100 - 1000000 * (std::chrono::steady_clock::now() - now).count();
-		std::this_thread::sleep_for(std::chrono::microseconds(usec));
-	}
+	run_clocked((double) 0.0001, slot_100us);
 }
 
 void LawnEngine::run_1ms()
 {
-	long long int usec;
-	std::chrono::time_point<std::chrono::steady_clock> now;
-	std::chrono::duration<double> diff;
-
-	while (true)
-	{
-		diff = std::chrono::steady_clock::now() - now;
-
-		if (diff.count() >= 0.001)
-		{
-			now = std::chrono::steady_clock::now();
-
-			for (std::list<fp>::iterator i = slot_1ms.begin(); i != slot_1ms.end(); ++i)
-			{
-				(*i)(LawnEngine::Instance());
-			}
-		}
-
-		usec = 1000 - 1000000 * (std::chrono::steady_clock::now() - now).count();
-		std::this_thread::sleep_for(std::chrono::microseconds(usec));
-	}
-
+	run_clocked((double) 0.001, slot_1ms);
 }
 
 void LawnEngine::run_10ms()
 {
-	long long int usec;
-	std::chrono::time_point<std::chrono::steady_clock> now;
-	std::chrono::duration<double> diff;
-
-	while (true)
-	{
-		diff = std::chrono::steady_clock::now() - now;
-
-		if (diff.count() >= 0.01)
-		{
-			now = std::chrono::steady_clock::now();
-
-			for (std::list<fp>::iterator i = slot_10ms.begin(); i != slot_10ms.end(); ++i)
-			{
-				(*i)(LawnEngine::Instance());
-			}
-		}
-
-		usec = 5000 - 1000000 * (std::chrono::steady_clock::now() - now).count();
-		std::this_thread::sleep_for(std::chrono::microseconds(usec));
-	}
+	run_clocked((double) 0.01, slot_10ms);
 }
 
 void LawnEngine::run_100ms()
 {
-	long long int usec;
-	std::chrono::time_point<std::chrono::steady_clock> now;
-	std::chrono::duration<double> diff;
-
-	while (true)
-	{
-		diff = std::chrono::steady_clock::now() - now;
-
-		if (diff.count() >= 0.1)
-		{
-			now = std::chrono::steady_clock::now();
-
-			for (std::list<fp>::iterator i = slot_100ms.begin(); i != slot_100ms.end(); ++i)
-			{
-				(*i)(LawnEngine::Instance());
-			}
-		}
-
-		usec = 20000 - 1000000 * (std::chrono::steady_clock::now() - now).count();
-		std::this_thread::sleep_for(std::chrono::microseconds(usec));
-	}
+	run_clocked((double) 0.1, slot_100ms);
 }
 
 void LawnEngine::run_1000ms()
 {
-	long long int usec;
-	std::chrono::time_point<std::chrono::steady_clock> now;
-	std::chrono::duration<double> diff;
-
-	while (true)
-	{
-		diff = std::chrono::steady_clock::now() - now;
-
-		if (diff.count() >= 1)
-		{
-			now = std::chrono::steady_clock::now();
-
-			for (std::list<fp>::iterator i = slot_1000ms.begin(); i != slot_1000ms.end(); ++i)
-			{
-				(*i)(LawnEngine::Instance());
-			}
-		}
-
-		usec = 200000 - 1000000 * (std::chrono::steady_clock::now() - now).count();
-		std::this_thread::sleep_for(std::chrono::microseconds(usec));
-	}
-
+	run_clocked((double) 1, slot_1000ms);
 }
 
 void LawnEngine::connect_init(fp function)
