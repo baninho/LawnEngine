@@ -51,7 +51,7 @@ void LawnEngine::run_clocked(double dt_seconds, std::list<fp>& slots)
 			}
 		}
 
-		usec = 1000000 * (dt_seconds - std::chrono::steady_clock::now() - now).count();
+		usec = 1000000 * (dt_seconds - (std::chrono::steady_clock::now() - now).count());
 		std::this_thread::sleep_for(std::chrono::microseconds(usec));
 	}
 }
